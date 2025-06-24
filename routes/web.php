@@ -1,58 +1,30 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MyController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\Admin;
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('about', function () {
-    return ('ini halaman about');
-});
-
-Route::get('profile', function () {
-    return view('profile');
-});
-
-Route::get('produk/{namaProduct}', function ($p) {
-    return 'saya membeli ' . $p;
-});
-
-Route::get('kategori/{namaKategori}', function($kategori) {
-    return view('kategori', compact('kategori'));
-});
-
-Route::get('search/{keyword?}', function($key = null) {
-    return view('search', compact('key'));
-});
-
-// latihan
-Route::get('promo/{barang?}/{kode?}', function($barang = null, $kode = null) {
-    return view('promo', compact('barang', 'kode'));
-});
-
-Route::get('buku', [MyController::class, 'index']);
-
-Route::get('buku/create', [MyController::class, 'create']);
-Route::post('buku', [MyController::class, 'store']);
-
-Route::get('buku/{id}', [MyController::class, 'show']);
-
-Route::get('buku/{id}/edit', [MyController::class, 'edit']);
-Route::put('buku/{id}', [MyController::class, 'update']);
-
-Route::delete('buku/{id}', [MyController::class, 'destroy']);
-
+// Otentikasi
 Auth::routes();
 
+// Route untuk tamu/member
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/product', [FrontendController::class, 'product']);
+Route::get('/product/{product}', [FrontendController::class, 'singleProduct']);
+Route::get('/about', [FrontendController::class, 'about']);
+Route::get('/cart', [FrontendController::class, 'cart']);
+
+// Dashboard untuk user login biasa
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-// Admin atau Backend
-Route::group(['prefix'=>'admin','middleware'=>['auth', Admin::class]], function() {
-    Route::get('/', [BackendController::class,'index']);
+// Route untuk Admin (dengan middleware auth dan Admin)
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', Admin::class]], function () {
+    Route::get('/', [BackendController::class, 'index']);
+    Route::resource('/category', CategoryController::class);
+    Route::resource('/product', ProductController::class);
 });
