@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('qty');
 
             $table->foreign('user_id')->references('id')
-                  ->on('users');
+                ->on('users');
             $table->foreign('product_id')->references('id')
-                  ->on('products');
-            
+                ->on('products');
+
             $table->timestamps();
         });
     }

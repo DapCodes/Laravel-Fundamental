@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use DB;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -23,7 +21,7 @@ class ProductSeeder extends Seeder
             'description' => 'Lorem Ipsum',
             'price' => 75000,
             'stock' => 100,
-            'image' => 'image.png'
+            'image' => 'image.png',
         ]);
 
         \App\Models\Product::create([
@@ -33,7 +31,7 @@ class ProductSeeder extends Seeder
             'description' => 'Lorem Ipsum',
             'price' => 17500000,
             'stock' => 100,
-            'image' => 'image.png'
+            'image' => 'image.png',
         ]);
     }
 }

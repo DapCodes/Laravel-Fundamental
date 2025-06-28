@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -15,12 +15,18 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::latest()->get();
+
+        $title = 'Hapus data!';
+        $text = 'mau ngga di hapus data nya??';
+        confirmDelete($title, $text);
+
         return view('backend.product.index', compact('product'));
     }
 
     public function create()
     {
         $category = Category::all();
+
         return view('backend.product.create', compact('category'));
     }
 
@@ -46,20 +52,21 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $randomName = Str::random(20).'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('product', $randomName, 'public');
             $product->image = $path;
         }
 
         $product->save();
 
-        return redirect()->route('product.index')->with('success', 'Produk berhasil ditambahkan.');
+        return redirect()->route('backend.product.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     // Tampilkan detail produk
     public function show($id)
     {
         $product = Product::findOrFail($id);
+
         return view('backend.product.show', compact('product'));
     }
 
@@ -68,6 +75,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $category = Category::all();
+
         return view('backend.product.edit', compact('product', 'category'));
     }
 
@@ -91,17 +99,17 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->category_id = $request->category_id;
 
-       if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             Storage::disk('public')->delete($product->image);
             $file = $request->file('image');
-            $randomName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+            $randomName = Str::random(20).'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('product', $randomName, 'public');
             $product->image = $path;
         }
 
         $product->save();
 
-        return redirect()->route('product.index')->with('success', 'Produk berhasil diperbarui.');
+        return redirect()->route('backend.product.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
     // Hapus produk
@@ -115,6 +123,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('product.index')->with('success', 'Produk berhasil dihapus.');
+        return redirect()->route('backend.product.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

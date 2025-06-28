@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Category;
-use Alert;
+use Illuminate\Http\Request;
 use Str;
 
 class CategoryController extends Controller
 {
-    
     public function index()
     {
         $category = Category::latest()->get();
 
         $title = 'Hapus data!';
-        $text = "mau ngga di hapus data nya??";
+        $text = 'mau ngga di hapus data nya??';
         confirmDelete($title, $text);
+
         return view('backend.category.index', compact('category'));
     }
 
@@ -38,16 +37,15 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories',
         ]);
 
-        $category = new Category();
+        $category = new Category;
         $category->name = $request->name;
         $category->slug = Str::slug($request->name, '-'); // ← perbaikan di sini
         $category->save();
 
         toast('Data berhasil disimpan', 'success');
-        return redirect()->route('category.index');
+
+        return redirect()->route('backend.category.index');
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -55,6 +53,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
+
         return view('backend.category.edit', compact('category'));
     }
 
@@ -73,7 +72,8 @@ class CategoryController extends Controller
         $category->save();
 
         toast('Data berhasil diedit', 'success');
-        return redirect()->route('category.index');
+
+        return redirect()->route('backend.category.index');
     }
 
     /**
@@ -85,6 +85,7 @@ class CategoryController extends Controller
         $category->delete();
 
         toast('Data berhasil dihapus', 'success');
-        return redirect()->route('category.index');
+
+        return redirect()->route('backend.category.index');
     }
 }

@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">Tambah Category</div>
                     <div class="card-body">
-                        <form action="{{ route('category.update', $category->id) }}" method="post">
+                        <form action="{{ route('backend.category.update', $category->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="mb-2">

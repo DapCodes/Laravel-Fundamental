@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header bg-secondary text-light">
                     Data Kategori
-                    <a href="{{ route('category.create') }}" class="btn btn-info btn-sm" style="float: right;">Tambah</a>
+                    <a href="{{ route('backend.category.create') }}" class="btn btn-info btn-sm" style="float: right;">Tambah</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -31,8 +31,8 @@
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->slug }}</td>
                                         <td>
-                                            <a href="{{ route('category.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="{{ route('category.destroy', $data->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
+                                            <a href="{{ route('backend.category.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="{{ route('backend.category.destroy', $data->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

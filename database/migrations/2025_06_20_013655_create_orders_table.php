@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'completed', 'cancel']);
 
             $table->foreign('user_id')->references('id')
-                  ->on('users');
+                ->on('users');
 
             $table->timestamps();
         });
@@ -32,9 +32,9 @@ return new class extends Migration
             $table->integer('price');
 
             $table->foreign('order_id')->references('id')
-                  ->on('orders');
+                ->on('orders');
             $table->foreign('product_id')->references('id')
-                  ->on('products');
+                ->on('products');
 
             $table->timestamps();
         });
