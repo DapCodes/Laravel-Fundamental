@@ -27,15 +27,15 @@
         <li class="sidebar-item">
           <a class="sidebar-link" href="#" id="get-url" aria-expanded="false">
             <span>
-              <i class="ti ti-home"></i>
+              <i class="ti ti-layout-dashboard"></i>
             </span>
-            <span class="hide-menu">Home</span>
+            <span class="hide-menu">Dashboard</span>
           </a>
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{ route('backend.category.index') }}" id="get-url" aria-expanded="false">
             <span>
-              <i class="ti ti-tags"></i>
+              <i class="ti ti-tag"></i>
             </span>
             <span class="hide-menu">Category</span>
           </a>
@@ -43,7 +43,7 @@
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{ route('backend.product.index') }}" id="get-url" aria-expanded="false">
             <span>
-              <i class="ti ti-package"></i>
+              <i class="ti ti-box"></i>
             </span>
             <span class="hide-menu">Product</span>
           </a>
@@ -51,7 +51,7 @@
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{ route('backend.orders.index') }}" id="get-url" aria-expanded="false">
             <span>
-              <i class="ti ti-package"></i>
+              <i class="ti ti-shopping-cart"></i>
             </span>
             <span class="hide-menu">Order</span>
           </a>
@@ -59,7 +59,7 @@
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{ route('backend.user.index') }}" id="get-url" aria-expanded="false">
             <span>
-              <i class="ti ti-user"></i>
+              <i class="ti ti-users"></i>
             </span>
             <span class="hide-menu">User</span>
           </a>
